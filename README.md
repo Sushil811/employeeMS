@@ -2,6 +2,9 @@
 
 A full-stack web application for managing employee information, built with React.js frontend and Node.js backend.
 
+https://youtu.be/V6l3ELOMazc
+
+
 ## 🚀 Features
 
 ### Frontend (React.js)
