@@ -10,7 +10,6 @@ Overall, the Employee Management System highlights proficiency in full-stack dev
 
 https://youtu.be/V6l3ELOMazc
 
-<!--
 
 ## 🚀 Features
 
@@ -30,6 +29,12 @@ https://youtu.be/V6l3ELOMazc
 - **Database Integration**: MongoDB with Mongoose ODM
 - **Error Handling**: Comprehensive error handling and validation
 - **Security**: Input validation and sanitization
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/V6l3ELOMazc?si=hdYy7RjX_O_agb01" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+<!--
 
 ## 🛠️ Tech Stack
 
