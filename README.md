@@ -10,6 +10,7 @@ Overall, the Employee Management System highlights proficiency in full-stack dev
 
 https://youtu.be/V6l3ELOMazc
 
+<!--
 
 ## 🚀 Features
 
@@ -176,21 +177,9 @@ The frontend will run on `http://localhost:5173`
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
+-->
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👨‍💻 Author
 
 **Sushil** - [GitHub Profile](https://github.com/Sushil811)
-
-## 🙏 Acknowledgments
-
-- React.js community for the amazing framework
-- MongoDB team for the excellent database
-- Bootstrap team for the responsive CSS framework
-- All contributors and supporters of this project
-
----
-
-**Note**: Make sure to update the MongoDB connection string and JWT secret in the `.env` file before running the application. Also, ensure that MongoDB is running on your system or use a cloud database service like MongoDB Atlas. 
