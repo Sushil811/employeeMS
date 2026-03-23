@@ -1,4 +1,4 @@
-# Employee Management System (EmployeeMS)
+# Employee Management System (EmployeeMS) 
 
 The Employee Management System is a full-stack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) designed to simplify and automate employee data management within organizations. The system enables administrators to efficiently manage employee records, including adding, updating, viewing, and deleting employee information. It features secure JWT-based authentication, role-based access control, and an intuitive dashboard for HR and management teams.
 
