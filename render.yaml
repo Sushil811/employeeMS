@@ -14,4 +14,4 @@ services:
         sync: false
       - key: NODE_ENV
         value: production
-    staticPublishPath: ./EmployeeMS/dist
+  
