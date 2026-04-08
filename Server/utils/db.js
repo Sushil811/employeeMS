@@ -45,8 +45,8 @@ const connectDB = async () => {
         console.log('2. Check if the connection string is correct');
         console.log('3. Verify MongoDB is accessible on localhost:27017');
         console.log('4. Check if the database name is correct');
-        process.exit(1);
+        // process.exit(1); // Keeps the server running for easier debugging of the connection error
     }
-};
+}
 
 export default connectDB;

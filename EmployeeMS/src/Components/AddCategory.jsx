@@ -52,7 +52,7 @@ function AddCategory() {
 
     return (
         <div className='d-flex justify-content-center align-items-center vh-100'>
-            <div className='p-3 rounded-0 w-25 border'>
+            <div className='p-3 rounded col-11 col-md-8 col-lg-4 border bg-white shadow-sm'>
                 <h2>Add Category</h2>
                 {error && <div className="alert alert-danger">{error}</div>}
                 <form onSubmit={handleSubmit}>

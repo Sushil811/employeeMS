@@ -28,10 +28,10 @@ function Category() {
       </div>
       {error && <div className="alert alert-danger">{error}</div>}
       <Link to='/dashboard/add_category' className='btn btn-success'>Add Category</Link>
-      <div className='mt-3'>
-        <table className='table table-bordered table-striped'>
+      <div className='mt-3 table-responsive'>
+        <table className='table table-bordered table-striped table-hover'>
           <caption>List of Categories</caption>
-          <thead>
+          <thead className="table-dark">
             <tr>
               <th>Name</th>
             </tr>
@@ -53,6 +53,7 @@ function Category() {
           </tbody>
         </table>
       </div>
+
     </div>
   )
 }

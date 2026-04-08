@@ -75,7 +75,7 @@ const AddEmployee = () => {
 
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
-      <div className="p-3 rounded w-50 border">
+      <div className="p-3 rounded col-11 col-md-8 col-lg-6 border bg-white shadow-sm">
         <h3 className="text-center">Add Employee</h3>
         {error && <div className="alert alert-danger">{error}</div>}
         <form className="row g-1" onSubmit={handleSubmit}>

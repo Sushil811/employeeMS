@@ -7,6 +7,7 @@ const Employee = () => {
   const [employee, setEmployee] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   //const navigate = useNavigate();
 
@@ -47,7 +48,10 @@ const Employee = () => {
       });
   }
 
-    
+  const filteredEmployees = employee.filter(e => 
+    e.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    e.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   
   return (
@@ -56,64 +60,78 @@ const Employee = () => {
         <h3>Employee List</h3>
       </div>
       {error && <div className="alert alert-danger">{error}</div>}
-      <Link to="/dashboard/add_employee" className="btn btn-success mb-3">
-        Add Employee
-      </Link>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <Link to="/dashboard/add_employee" className="btn btn-success">
+          Add Employee
+        </Link>
+        <div className="w-25">
+          <input 
+            type="text" 
+            placeholder="Search Employee..." 
+            className="form-control"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
       <div className="mt-3">
         {loading ? (
           <div className="text-center">Loading...</div>
         ) : employee.length === 0 ? (
           <div className="text-center">No employees found.</div>
         ) : (
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Salary</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {employee.map((e) => (
-                <tr key={e._id}>
-                  <td>{e.name}</td>
-                  <td>
-                    <img
-                      src={`http://localhost:3000/Images/${e.image}`}
-                      className="employee_image"
-                      alt="Employee"
-                      onError={(event) => {
-                        event.target.onerror = null;
-                        event.target.src = "/default-image.png";
-                      }}
-                    />
-                  </td>
-                  <td>{e.email}</td>
-                  <td>{e.address}</td>
-                  <td>{e.salary}</td>
-                  <td>
-                    <Link
-                      to={`/dashboard/edit_employee/${e._id}`}
-                      className="btn btn-info btn-sm me-2"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      className="btn btn-warning btn-sm"
-                      onClick={() => handleDelete(e._id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
+          <div className="table-responsive">
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Image</th>
+                  <th>Email</th>
+                  <th>Address</th>
+                  <th>Salary</th>
+                  <th>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredEmployees.map((e) => (
+                  <tr key={e._id}>
+                    <td>{e.name}</td>
+                    <td>
+                      <img
+                        src={`http://localhost:3000/Images/${e.image}`}
+                        className="employee_image"
+                        alt="Employee"
+                        onError={(event) => {
+                          event.target.onerror = null;
+                          event.target.src = "/employeems.jpeg"; // Fixed fallback
+                        }}
+                      />
+                    </td>
+                    <td>{e.email}</td>
+                    <td>{e.address}</td>
+                    <td>₹{e.salary}</td>
+                    <td>
+                      <Link
+                        to={`/dashboard/edit_employee/${e._id}`}
+                        className="btn btn-info btn-sm me-2 mb-1"
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        className="btn btn-warning btn-sm mb-1"
+                        onClick={() => handleDelete(e._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
+
     </div>
   );
 };

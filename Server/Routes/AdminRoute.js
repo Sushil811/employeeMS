@@ -8,10 +8,45 @@ import Category from '../models/Category.js';
 import Employee from '../models/Employee.js';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import fs from 'fs';
+import Leave from '../models/Leave.js';
 
 dotenv.config();
 
 const router = express.Router();
+
+// Ensure upload directory exists
+const uploadDir = 'Public/Images';
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+// Admin Register
+router.post('/admin_register', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.json({ status: false, Error: 'Email and password are required' });
+        }
+
+        const existingAdmin = await Admin.findOne({ email });
+        if (existingAdmin) {
+            return res.json({ status: false, Error: 'Admin already exists' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newAdmin = new Admin({
+            email,
+            password: hashedPassword
+        });
+
+        await newAdmin.save();
+        return res.json({ status: true, message: 'Admin registered successfully' });
+    } catch (error) {
+        console.error('Registration error:', error);
+        return res.json({ status: false, Error: 'Registration failed' });
+    }
+});
 
 // Admin Login
 router.post('/admin_login', async (req, res) => {
@@ -473,10 +508,10 @@ router.get('/admin_count', async (req, res) => {
         console.log('=== ADMIN COUNT REQUEST ===');
         const count = await Admin.countDocuments();
         console.log('✅ Admin count:', count);
-        return res.json({ Status: true, Result: [{ admin: count }] });
+        return res.json({ status: true, Result: [{ admin: count }] });
     } catch (error) {
         console.error('Admin count error:', error);
-        return res.json({ Status: false, Error: 'Failed to get admin count' });
+        return res.json({ status: false, Error: 'Failed to get admin count' });
     }
 });
 
@@ -486,10 +521,10 @@ router.get('/employee_count', async (req, res) => {
         console.log('=== EMPLOYEE COUNT REQUEST ===');
         const count = await Employee.countDocuments();
         console.log('✅ Employee count:', count);
-        return res.json({ Status: true, Result: [{ employee: count }] });
+        return res.json({ status: true, Result: [{ employee: count }] });
     } catch (error) {
         console.error('Employee count error:', error);
-        return res.json({ Status: false, Error: 'Failed to get employee count' });
+        return res.json({ status: false, Error: 'Failed to get employee count' });
     }
 });
 
@@ -507,10 +542,10 @@ router.get('/salary_count', async (req, res) => {
         ]);
         const totalSalary = result.length > 0 ? result[0].totalSalary : 0;
         console.log('✅ Total salary:', totalSalary);
-        return res.json({ Status: true, Result: [{ salary: totalSalary }] });
+        return res.json({ status: true, Result: [{ salary: totalSalary }] });
     } catch (error) {
         console.error('Salary count error:', error);
-        return res.json({ Status: false, Error: 'Failed to get salary count' });
+        return res.json({ status: false, Error: 'Failed to get salary count' });
     }
 });
 
@@ -520,10 +555,33 @@ router.get('/admin_records', async (req, res) => {
         console.log('=== ADMIN RECORDS REQUEST ===');
         const admins = await Admin.find({}, { password: 0 }); // Exclude password
         console.log('✅ Admin records found:', admins.length);
-        return res.json({ Status: true, Result: admins });
+        return res.json({ status: true, Result: admins });
     } catch (error) {
         console.error('Admin records error:', error);
-        return res.json({ Status: false, Error: 'Failed to get admin records' });
+        return res.json({ status: false, Error: 'Failed to get admin records' });
+    }
+});
+
+
+router.get('/leaves', async (req, res) => {
+    try {
+        const leaves = await Leave.find().populate('employee_id', 'name email').sort({ createdAt: -1 });
+        return res.json({ status: true, Result: leaves });
+    } catch (error) {
+        console.error('Get leaves error:', error);
+        return res.json({ status: false, Error: 'Failed to fetch leaves' });
+    }
+});
+
+// Update Leave Status
+router.post('/update_leave_status', async (req, res) => {
+    try {
+        const { id, status } = req.body;
+        await Leave.findByIdAndUpdate(id, { status });
+        return res.json({ status: true, message: 'Leave status updated' });
+    } catch (error) {
+        console.error('Update leave status error:', error);
+        return res.json({ status: false, Error: 'Failed to update leave status' });
     }
 });
 
