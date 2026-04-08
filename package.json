@@ -1,0 +1,12 @@
+{
+  "name": "employee-management-system",
+  "version": "1.0.0",
+  "scripts": {
+    "install-server": "cd Server && npm install",
+    "install-client": "cd EmployeeMS && npm install",
+    "build-client": "cd EmployeeMS && npm run build",
+    "install-all": "npm run install-server && npm run install-client",
+    "build": "npm run install-all && npm run build-client",
+    "start": "cd Server && node index.js"
+  }
+}

@@ -159,20 +159,20 @@ The frontend will run on `http://localhost:5173`
 - `PUT /auth/update_category/:id` - Update category
 - `DELETE /auth/delete_category/:id` - Delete category
 
-## 🚀 Deployment
+## 🚀 Deployment on Render
 
-### Frontend Deployment (Vercel/Netlify)
-1. Build the frontend:
-   ```bash
-   cd EmployeeMS
-   npm run build
-   ```
-2. Deploy the `dist` folder to your preferred hosting service
+This project is optimized for deployment on [Render](https://render.com/).
 
-### Backend Deployment (Railway/Render)
-1. Set up environment variables in your hosting platform
-2. Deploy the Server directory
-3. Update the frontend API base URL to point to your deployed backend
+1. **Connect Repository**: Link your GitHub repository to Render.
+2. **Create Web Service**: Choose **Web Service**.
+3. **Configuration**:
+   - **Build Command**: `npm run build`
+   - **Start Command**: `npm start`
+4. **Environment Variables**:
+   - `MONGODB_URI`: Your MongoDB Atlas connection string.
+   - `JWT_SECRET`: A secure random string.
+   - `FRONTEND_URL`: Your deployed Render URL.
+5. **CORS**: The backend serves the frontend from `EmployeeMS/dist` automatically.
 
 ## 🤝 Contributing
 
