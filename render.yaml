@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ems-fullstack
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false
+      - key: NODE_ENV
+        value: production
+    staticPublishPath: ./EmployeeMS/dist
